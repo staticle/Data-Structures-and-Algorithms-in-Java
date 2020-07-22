@@ -34,6 +34,51 @@ public class Linklist {
             temp.next = head;
             head = temp;
         }
+        void insertAtPosition(int position,int data){
+            //problem starting at 0 || 1 returns same result
+            boolean flag = true;
+            Node node= head, startingNode=null;
+            Node temp = new Node();
+            temp.data = data;
+            for(int i=0;i<position-1;i++){
+                node=node.next;
+                if(node.next==null){
+                    flag = false;
+                    System.out.println("You entered Position greater than size");
+                    break;
+                }
+            }
+            if(flag) {
+                startingNode = node.next;
+                node.next = temp;
+                temp.next = startingNode;
+            }
+        }
+        void deleteByPosition(int position){
+            Node temp = head,prevLink= null;
+            boolean flag = true;
+            for(int i=0;i<position-1;i++){
+                if(position==0){ // covers if we wanna delete first element
+                    temp = temp.next;
+                    head = temp;
+                    flag = false;
+                    break;
+                }
+                else{
+                    temp = temp.next;
+                    if(temp.next ==null)
+                    {
+                        flag = false;
+                        System.out.println("Cannot delete outside rangw");
+                        break;
+                    }
+                }
+            }
+            if(flag) {
+                Node delete = temp.next;
+                temp.next = delete.next;
+            }
+        }
     }
     public static void  main(String args[]){
         LinkedList list = new LinkedList();
@@ -43,6 +88,9 @@ public class Linklist {
         list.insert(9);
         list.insertFront(10);
         list.insert(15);
+        list.insertAtPosition(5,89);
+        list.insertAtPosition(2,77);
+        list.deleteByPosition(7);
         list.show();
     }
 }
