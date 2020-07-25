@@ -79,6 +79,26 @@ public class Linklist {
                 temp.next = delete.next;
             }
         }
+	void deleteByValue(int val){
+		Node temp = head;
+		boolean elementExists = false;
+		if(temp.data == val){
+			head = temp.next;
+			elementExists = true;
+		}
+		else{
+			while(temp.next!=null){
+				Node prev = temp;
+				temp = temp.next;
+				if(temp.data == val){
+					prev.next = temp.next;
+					elementExists =true;
+				}
+			}
+		}
+		if(!elementExists)
+		System.out.println("Element not found");
+	}
     }
     public static void  main(String args[]){
         LinkedList list = new LinkedList();
@@ -91,6 +111,7 @@ public class Linklist {
         list.insertAtPosition(5,89);
         list.insertAtPosition(2,77);
         list.deleteByPosition(7);
+	list.deleteByValue(6);
         list.show();
     }
 }
